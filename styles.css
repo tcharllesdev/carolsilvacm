@@ -185,6 +185,12 @@ button {
   flex-shrink: 0;
 }
 
+.avatar-frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .avatar-frame img {
   width: 100%;
   height: 100%;
@@ -208,14 +214,17 @@ button {
 .monogram-mark {
   display: inline-flex;
   align-items: center;
-  width: 2.35rem;
-  height: 1.7rem;
-  color: var(--accent-deep);
+  height: 2.35rem;
+  width: auto;
+  flex-shrink: 0;
 }
 
-.monogram-mark svg {
-  width: 100%;
+.monogram-mark picture,
+.monogram-mark img {
+  display: block;
   height: 100%;
+  width: auto;
+  object-fit: contain;
 }
 
 .handle-link {
@@ -319,6 +328,12 @@ button {
 .video-stage:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: -3px;
+}
+
+.video-stage picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .video-stage img {

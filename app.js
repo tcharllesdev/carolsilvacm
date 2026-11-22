@@ -1,7 +1,7 @@
 /**
  * Hidratação progressiva dos links da marca Carol Silva | Crochê & Macramê.
- * Lê window.CAROL_LINKS de links.config.js para ativar automaticamente os
- * links do vídeo e do canal do YouTube assim que forem preenchidos.
+ * Lê window.CAROL_LINKS de links.config.js e sincroniza automaticamente os
+ * estados ativo (ready) e pendente (pending) preservando os elementos <picture>.
  */
 (function initCarolLinks() {
   "use strict";
@@ -33,30 +33,44 @@
     anchor.setAttribute("href", instagramUrl);
   });
 
-  // 2. Card principal de vídeo do YouTube
+  // 2. Card principal de vídeo do YouTube (ready <-> pending preservando <picture>)
   const videoCard = document.getElementById("youtube-video-card");
   const stageSlot = document.getElementById("youtube-stage-slot");
   const actionSlot = document.getElementById("youtube-action-slot");
 
   if (videoCard && stageSlot && actionSlot) {
+    const existingTrigger = document.getElementById("youtube-stage-trigger");
+
     if (youtubeVideoUrl) {
       videoCard.dataset.state = "ready";
 
-      const stageTrigger = document.getElementById("youtube-stage-trigger");
-      if (stageTrigger) {
-        const stageLink = document.createElement("a");
-        stageLink.className = "video-stage video-stage--ready";
-        stageLink.href = youtubeVideoUrl;
-        stageLink.target = "_blank";
-        stageLink.rel = "noopener noreferrer";
-        stageLink.setAttribute(
-          "aria-label",
-          "Assistir no YouTube: Enfeite de Natal em Crochê — Passo a passo completo (abre em nova aba)"
-        );
-        while (stageTrigger.firstChild) {
-          stageLink.appendChild(stageTrigger.firstChild);
+      if (existingTrigger) {
+        if (existingTrigger.tagName === "A") {
+          existingTrigger.className = "video-stage video-stage--ready";
+          existingTrigger.setAttribute("href", youtubeVideoUrl);
+          existingTrigger.setAttribute("target", "_blank");
+          existingTrigger.setAttribute("rel", "noopener noreferrer");
+          existingTrigger.removeAttribute("aria-describedby");
+          existingTrigger.setAttribute(
+            "aria-label",
+            "Assistir no YouTube: Enfeite de Natal em Crochê — Passo a passo completo (abre em nova aba)"
+          );
+        } else {
+          const stageLink = document.createElement("a");
+          stageLink.id = "youtube-stage-trigger";
+          stageLink.className = "video-stage video-stage--ready";
+          stageLink.href = youtubeVideoUrl;
+          stageLink.target = "_blank";
+          stageLink.rel = "noopener noreferrer";
+          stageLink.setAttribute(
+            "aria-label",
+            "Assistir no YouTube: Enfeite de Natal em Crochê — Passo a passo completo (abre em nova aba)"
+          );
+          while (existingTrigger.firstChild) {
+            stageLink.appendChild(existingTrigger.firstChild);
+          }
+          stageSlot.replaceChildren(stageLink);
         }
-        stageSlot.replaceChildren(stageLink);
       }
 
       const ctaLink = document.createElement("a");
@@ -72,17 +86,46 @@
       actionSlot.replaceChildren(ctaLink);
     } else {
       videoCard.dataset.state = "pending";
-      const stageTrigger = document.getElementById("youtube-stage-trigger");
-      const statusText = document.getElementById("youtube-status-text");
-      if (stageTrigger && statusText) {
+
+      let stageButton = existingTrigger;
+      if (existingTrigger && existingTrigger.tagName !== "BUTTON") {
+        stageButton = document.createElement("button");
+        stageButton.type = "button";
+        stageButton.id = "youtube-stage-trigger";
+        stageButton.className = "video-stage video-stage--pending";
+        stageButton.setAttribute("aria-describedby", "youtube-status-text");
+        stageButton.setAttribute(
+          "aria-label",
+          "Enfeite de Natal em Crochê — Passo a passo completo (vídeo em publicação)"
+        );
+        while (existingTrigger.firstChild) {
+          stageButton.appendChild(existingTrigger.firstChild);
+        }
+        stageSlot.replaceChildren(stageButton);
+      }
+
+      const statusText = document.createElement("p");
+      statusText.className = "video-status";
+      statusText.id = "youtube-status-text";
+      statusText.setAttribute("role", "status");
+      statusText.setAttribute("aria-live", "polite");
+      statusText.innerHTML =
+        '<span class="status-dot" aria-hidden="true"></span>' +
+        "<span>Vídeo em publicação — link disponível em breve</span>";
+      actionSlot.replaceChildren(statusText);
+
+      if (stageButton && !stageButton.dataset.pendingBound) {
+        stageButton.dataset.pendingBound = "true";
         let highlightTimer = null;
-        stageTrigger.addEventListener("click", () => {
-          statusText.classList.remove("is-highlighted");
-          void statusText.offsetWidth;
-          statusText.classList.add("is-highlighted");
+        stageButton.addEventListener("click", () => {
+          const currentStatus = document.getElementById("youtube-status-text");
+          if (!currentStatus) return;
+          currentStatus.classList.remove("is-highlighted");
+          void currentStatus.offsetWidth;
+          currentStatus.classList.add("is-highlighted");
           window.clearTimeout(highlightTimer);
           highlightTimer = window.setTimeout(() => {
-            statusText.classList.remove("is-highlighted");
+            currentStatus.classList.remove("is-highlighted");
           }, 1600);
         });
       }

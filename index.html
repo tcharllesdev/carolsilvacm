@@ -10,7 +10,8 @@
     />
     <meta name="theme-color" content="#FAF3E8" />
     <link rel="canonical" href="https://carolsilvacm.com/" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -50,8 +51,32 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="links.config.js" defer></script>
     <script src="app.js" defer></script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1883896609465266');
+      fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
   </head>
   <body>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1883896609465266&ev=PageView&noscript=1"
+        alt=""
+      />
+    </noscript>
     <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
 
     <div class="page-frame">
@@ -59,35 +84,34 @@
       <header class="brand-header" aria-label="Apresentação da marca Carol Silva">
         <div class="brand-identity">
           <div class="avatar-frame">
-            <img
-              src="assets/carol-avatar.jpg"
-              alt="Retrato de Carol Silva sorrindo, artesã de crochê e macramê"
-              width="400"
-              height="400"
-              decoding="async"
-              fetchpriority="high"
-            />
+            <picture>
+              <source srcset="assets/carol-avatar.avif" type="image/avif" />
+              <source srcset="assets/carol-avatar.webp" type="image/webp" />
+              <img
+                src="assets/carol-avatar.jpg"
+                alt="Retrato de Carol Silva sorrindo, artesã de crochê e macramê"
+                width="400"
+                height="400"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </picture>
           </div>
 
           <div class="brand-copy">
             <div class="brand-top-row">
               <span class="monogram-mark" aria-hidden="true">
-                <svg viewBox="0 0 64 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M34.2 10.6C31.1 7.8 26.8 6.6 22.1 7.4C14.1 8.8 8.9 15.8 9.2 24.4C9.5 33.2 15.4 39.7 23.7 40.2C28.4 40.5 32.3 38.8 35.4 35.8"
-                    stroke="currentColor"
-                    stroke-width="2.6"
-                    stroke-linecap="round"
+                <picture>
+                  <source srcset="assets/monograma-cs.webp" type="image/webp" />
+                  <img
+                    src="assets/monograma-cs.png"
+                    alt=""
+                    width="178"
+                    height="256"
+                    decoding="async"
+                    fetchpriority="high"
                   />
-                  <path
-                    d="M48.8 13.6C46.9 10.3 43.2 8.5 38.9 8.9C34.1 9.4 31.1 12.6 31.4 16.5C31.8 20.9 36.5 22.3 41.2 24C46 25.7 49.8 27.9 49.5 33C49.2 37.9 44.7 41 38.8 40.9C34.5 40.8 31.1 39.1 29.1 36.4"
-                    stroke="#A93518"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                  />
-                  <circle cx="34.2" cy="10.6" r="1.5" fill="currentColor" />
-                  <circle cx="48.8" cy="13.6" r="1.4" fill="#A93518" />
-                </svg>
+                </picture>
               </span>
 
               <a
@@ -115,23 +139,28 @@
       <main id="conteudo-principal" class="main-content">
         <!-- Card principal customizado estilo embed do YouTube -->
         <section class="featured-section" aria-labelledby="video-destaque-titulo">
-          <article class="video-card" id="youtube-video-card" data-state="pending">
+          <article class="video-card" id="youtube-video-card" data-state="ready">
             <div class="video-stage-slot" id="youtube-stage-slot">
-              <button
-                type="button"
-                class="video-stage video-stage--pending"
+              <a
+                class="video-stage video-stage--ready"
                 id="youtube-stage-trigger"
-                aria-describedby="youtube-status-text"
-                aria-label="Enfeite de Natal em Crochê — Passo a passo completo (vídeo em publicação)"
+                href="https://youtu.be/f41jnjoGWn4"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Assistir no YouTube: Enfeite de Natal em Crochê — Passo a passo completo (abre em nova aba)"
               >
-                <img
-                  src="assets/youtube-thumb.jpg"
-                  alt="Miniatura do vídeo no YouTube: Peça exclusiva — Enfeite de Natal em Crochê fácil para iniciantes, apresentado por Carol Silva"
-                  width="1280"
-                  height="720"
-                  decoding="async"
-                  fetchpriority="high"
-                />
+                <picture>
+                  <source srcset="assets/youtube-thumb.avif" type="image/avif" />
+                  <source srcset="assets/youtube-thumb.webp" type="image/webp" />
+                  <img
+                    src="assets/youtube-thumb.jpg"
+                    alt="Miniatura do vídeo no YouTube: Peça exclusiva — Enfeite de Natal em Crochê fácil para iniciantes, apresentado por Carol Silva"
+                    width="1280"
+                    height="720"
+                    decoding="async"
+                    fetchpriority="high"
+                  />
+                </picture>
                 <span class="video-scrim" aria-hidden="true"></span>
                 <span class="video-play-btn" aria-hidden="true">
                   <svg viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,7 +171,7 @@
                     <path class="play-icon" d="M45 24 27 14v20l18-10Z" fill="#FAF3E8" />
                   </svg>
                 </span>
-              </button>
+              </a>
             </div>
 
             <div class="video-body">
@@ -157,10 +186,23 @@
               </h2>
 
               <div class="video-action-slot" id="youtube-action-slot">
-                <p class="video-status" id="youtube-status-text" role="status" aria-live="polite">
-                  <span class="status-dot" aria-hidden="true"></span>
-                  <span>Vídeo em publicação — link disponível em breve</span>
-                </p>
+                <a
+                  class="video-cta"
+                  href="https://youtu.be/f41jnjoGWn4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Assistir no YouTube</span>
+                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path
+                      d="M4.5 11.5 11.5 4.5M11.5 4.5H6M11.5 4.5V10"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
           </article>
