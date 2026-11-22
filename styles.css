@@ -1,0 +1,732 @@
+/* ==========================================================================
+   Design System — Carol Silva | Crochê & Macramê
+   Direção: Ateliê Editorial Contemporâneo
+   ========================================================================== */
+
+:root {
+  /* Superfícies e neutros quentes */
+  --bg: #faf3e8;
+  --surface: #fffdf9;
+  --surface-warm: #f2e4d1;
+  --surface-tint: #f6ebdc;
+
+  /* Bordas e divisórias */
+  --border: #dfc7a9;
+  --border-strong: #c9a984;
+
+  /* Tipografia e hierarquia */
+  --text: #321410;
+  --text-muted: #6e4a40;
+
+  /* Acentos da marca */
+  --accent: #a93518;
+  --accent-deep: #6b1612;
+  --accent-darkest: #4b0f0d;
+  --accent-ink: #faf3e8;
+
+  /* Acentos quentes de apoio */
+  --caramel: #c68857;
+  --honey: #e6a65d;
+  --olive: #6f6f49;
+  --olive-ink: #fffdf9;
+
+  /* Tipografia */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Layout e container único */
+  --container-max: 34rem; /* 544px — proporção editorial para link-in-bio */
+  --gutter: clamp(1rem, 4.5vw, 1.5rem);
+
+  /* Escala de espaçamento (base 4px/8px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+
+  /* Raios */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.125rem;
+  --radius-pill: 999px;
+
+  /* Elevação tátil contida */
+  --shadow-card: 0 1px 2px rgba(50, 20, 16, 0.04), 0 10px 26px -14px rgba(50, 20, 16, 0.14);
+  --shadow-card-hover: 0 2px 6px rgba(50, 20, 16, 0.07), 0 14px 30px -14px rgba(75, 15, 13, 0.22);
+  --shadow-play: 0 6px 20px rgba(50, 20, 16, 0.42);
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 180ms;
+}
+
+/* Reset enxuto */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  background-image: radial-gradient(
+    ellipse 90% 45% at 50% 0%,
+    rgba(230, 166, 93, 0.12),
+    transparent 70%
+  );
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.58;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Acessibilidade */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--accent-deep);
+  color: var(--accent-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+  outline: 2px solid var(--accent-darkest);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Eixo único de container */
+.page-frame {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: clamp(1.75rem, 5vw, 3.25rem) clamp(2rem, 5vw, 3rem);
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* ==========================================================================
+   1. Cabeçalho editorial da marca
+   ========================================================================== */
+.brand-header {
+  display: grid;
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand-identity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.875rem, 3.5vw, 1.375rem);
+}
+
+.avatar-frame {
+  width: clamp(5.25rem, 22vw, 6.5rem);
+  height: clamp(5.25rem, 22vw, 6.5rem);
+  padding: 4px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 4px 14px -8px rgba(50, 20, 16, 0.2);
+  flex-shrink: 0;
+}
+
+.avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.brand-copy {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.brand-top-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+}
+
+.monogram-mark {
+  display: inline-flex;
+  align-items: center;
+  width: 2.35rem;
+  height: 1.7rem;
+  color: var(--accent-deep);
+}
+
+.monogram-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.handle-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  margin-block: -0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.handle-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0.125rem 0.625rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.handle-link:hover .handle-pill {
+  border-color: var(--border-strong);
+  background: var(--surface-warm);
+  color: var(--accent-deep);
+}
+
+.brand-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.05rem, 7vw, 2.65rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.brand-tagline {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.brand-bio {
+  margin: 0;
+  max-width: 58ch;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   2. Conteúdo principal e card customizado estilo embed do YouTube
+   ========================================================================== */
+.main-content {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.video-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.video-card[data-state="ready"]:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.video-stage {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  background: var(--text);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.video-stage:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.video-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 280ms var(--ease-out);
+}
+
+.video-stage--ready:hover img {
+  transform: scale(1.02);
+}
+
+.video-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(50, 20, 16, 0.28) 0%,
+    rgba(50, 20, 16, 0.04) 40%,
+    rgba(50, 20, 16, 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* Botão Play central estilo YouTube nas cores da marca */
+.video-play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(3.75rem, 15vw, 4.35rem);
+  height: clamp(2.65rem, 10.6vw, 3.05rem);
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(var(--shadow-play));
+  transition: transform var(--duration-fast) var(--ease-out);
+  pointer-events: none;
+}
+
+.video-play-btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+.video-play-btn .play-bg {
+  fill: var(--accent-deep);
+  fill-opacity: 0.92;
+  stroke: rgba(250, 243, 232, 0.55);
+  stroke-width: 1.5;
+  transition:
+    fill var(--duration-fast) var(--ease-out),
+    fill-opacity var(--duration-fast) var(--ease-out);
+}
+
+.video-stage:hover .video-play-btn,
+.video-stage:focus-visible .video-play-btn {
+  transform: translate(-50%, -50%) scale(1.07);
+}
+
+.video-stage:hover .video-play-btn .play-bg,
+.video-stage:focus-visible .video-play-btn .play-bg {
+  fill: var(--accent);
+  fill-opacity: 1;
+}
+
+.video-stage--pending:active .video-play-btn {
+  transform: translate(-50%, -50%) scale(0.97);
+}
+
+.video-body {
+  padding: clamp(1rem, 3.8vw, 1.375rem);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.video-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.tag-free {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.625rem;
+  border-radius: var(--radius-pill);
+  background: var(--olive);
+  color: var(--olive-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.meta-separator {
+  color: var(--border-strong);
+}
+
+.meta-detail {
+  font-weight: 500;
+}
+
+.video-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 4.8vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+/* Estado honesto enquanto youtubeVideoUrl está vazio */
+.video-status {
+  margin: var(--space-1) 0 0;
+  min-height: 44px;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-warm);
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.video-status.is-highlighted {
+  border-color: var(--accent);
+  background: #efe0cb;
+}
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(169, 53, 24, 0.16);
+  flex-shrink: 0;
+}
+
+/* CTA ativo quando youtubeVideoUrl estiver preenchido */
+.video-cta {
+  margin-top: var(--space-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.video-cta:hover {
+  background: var(--accent-deep);
+}
+
+.video-cta:active {
+  background: var(--accent-darkest);
+  transform: translateY(1px);
+}
+
+.video-cta svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3. Miniaturas com logo do Instagram e logo do YouTube (grid 2 colunas)
+   ========================================================================== */
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 3vw, 1rem);
+  align-items: stretch;
+}
+
+.channel-slot {
+  display: flex;
+  min-width: 0;
+}
+
+.channel-card {
+  width: 100%;
+  min-width: 0;
+  min-height: 112px;
+  padding: clamp(0.875rem, 3.2vw, 1.125rem);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+  box-shadow: 0 1px 2px rgba(50, 20, 16, 0.03);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.channel-card--interactive:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-tint);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-1px);
+}
+
+.channel-card--interactive:active {
+  transform: translateY(0);
+}
+
+.channel-card--pending {
+  background: var(--surface-warm);
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+
+.channel-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.channel-logo {
+  width: 2.75rem; /* 44px */
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.channel-logo svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.channel-logo--instagram {
+  color: var(--accent-deep);
+}
+
+.channel-logo--youtube {
+  color: var(--accent);
+}
+
+.channel-card--interactive:hover .channel-logo {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: var(--accent-ink);
+}
+
+.channel-arrow {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.channel-arrow svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.channel-card--interactive:hover .channel-arrow {
+  color: var(--accent-deep);
+  transform: translate(2px, -2px);
+}
+
+.channel-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.channel-text {
+  min-width: 0;
+  display: grid;
+  gap: 0.125rem;
+}
+
+.channel-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.channel-subtitle {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-muted);
+  overflow-wrap: break-word;
+}
+
+/* ==========================================================================
+   4. Rodapé mínimo
+   ========================================================================== */
+.site-footer {
+  margin-top: var(--space-1);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.footer-label {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding-inline: var(--space-1);
+  color: var(--accent-deep);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    text-decoration-color var(--duration-fast) var(--ease-out);
+}
+
+.footer-cta:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.footer-colophon {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Acessibilidade: movimento reduzido
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .video-stage--ready:hover img,
+  .video-stage:hover .video-play-btn,
+  .channel-card--interactive:hover,
+  .channel-card--interactive:hover .channel-arrow {
+    transform: none;
+  }
+}
